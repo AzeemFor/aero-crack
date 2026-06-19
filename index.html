@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>aero.crack</title>
+    <style>
+        body { margin: 0; background: black; color: white; font-family: sans-serif; overflow: hidden; }
+        canvas { display: block; }
+        .content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10; }
+        h1 { font-size: 5rem; }
+        .aero { color: #87CEEB; } /* Light Blue */
+        button { padding: 15px 30px; font-size: 1.2rem; cursor: pointer; background: #87CEEB; border: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="content">
+        <h1><span class="aero">aero</span>.crack</h1>
+        <button onclick="window.location.href='create.html'">Create Script</button>
+    </div>
+
+    <script>
+        const c = document.getElementById("canvas");
+        const ctx = c.getContext("2d");
+        c.width = window.innerWidth; c.height = window.innerHeight;
+        const drops = Array(Math.floor(c.width / 20)).fill(0);
+        function draw() {
+            ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, c.width, c.height);
+            ctx.fillStyle = "#87CEEB";
+            drops.map((y, i) => {
+                ctx.fillText("💧", i * 20, y);
+                drops[i] = (y > c.height || Math.random() > 0.975) ? 0 : y + 20;
+            });
+        }
+        setInterval(draw, 33);
+    </script>
+</body>
+</html>
